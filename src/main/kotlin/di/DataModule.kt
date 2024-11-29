@@ -13,8 +13,8 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
-
 import kotlinx.serialization.json.Json
+
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
@@ -22,7 +22,7 @@ val dataModule get() = module {
     factory<SqlDriver>(qualifier = qualifier<SqlDriver>()) {
         JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
     }
-    single(qualifier = qualifier<ANTDatabase>()) {
+    single<ANTDatabase>(qualifier = qualifier<ANTDatabase>()) {
         ANTDatabase.invoke(get(qualifier = qualifier<SqlDriver>()))
     }
     single(qualifier = qualifier<ArticleDao>()) {

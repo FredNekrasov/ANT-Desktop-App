@@ -24,18 +24,18 @@ sqldelight {
     }
 }
 dependencies {
+    // database
+    val sqlDelight = "2.0.2"
+    implementation("app.cash.sqldelight:sqlite-driver:$sqlDelight")
+    implementation("app.cash.sqldelight:runtime:$sqlDelight")
     // network & serialization
     val ktor = "3.0.1"
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("io.ktor:ktor-client-core:$ktor")
     implementation("io.ktor:ktor-client-okhttp:$ktor")
     implementation("io.ktor:ktor-client-logging:$ktor")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor")
-    // database
-    val sqlDelight = "2.0.2"
-    implementation("app.cash.sqldelight:sqlite-driver:$sqlDelight")
-    implementation("app.cash.sqldelight:runtime:$sqlDelight")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     // DI Koin
     val koin = "4.0.0"
     implementation("io.insert-koin:koin-core:$koin")
@@ -44,6 +44,7 @@ dependencies {
     implementation(compose.desktop.currentOs)
     implementation(compose.material3)
     implementation("io.coil-kt.coil3:coil-compose:3.0.3")
+    implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
 }
 
 compose.desktop {
