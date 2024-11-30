@@ -6,5 +6,5 @@ import org.koin.dsl.module
 import presentation.screens.viewModels.ArticleVM
 
 val presentationModule get() = module {
-    factory { ArticleVM(get<IArticleRepository>(qualifier<IArticleRepository>())) }
+    factory(qualifier<ArticleVM>()) { ArticleVM(get<IArticleRepository>(qualifier<IArticleRepository>())) }
 }
