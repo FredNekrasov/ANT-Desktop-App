@@ -7,7 +7,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
@@ -23,7 +22,7 @@ fun MainEntryPoint() {
     val scope = rememberCoroutineScope()
     val controller = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
-    var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
+    var selectedItemIndex by remember { mutableIntStateOf(0) }
     val navigateTo: (Int, String) -> Unit = { index, route ->
         controller.navigate(route)
         selectedItemIndex = index
