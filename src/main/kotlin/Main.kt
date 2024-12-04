@@ -6,18 +6,13 @@ import androidx.compose.ui.window.application
 import di.dataModule
 import di.presentationModule
 import org.koin.compose.KoinApplication
+import presentation.navigation.MainEntryPoint
 
 @Composable
 @Preview
 fun App() {
-    var text by remember { mutableStateOf("Hello, World!") }
-
     MaterialTheme {
-        Button(onClick = {
-            text = "Hello, Desktop!"
-        }) {
-            Text(text)
-        }
+        MainEntryPoint()
     }
 }
 
