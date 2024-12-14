@@ -1,6 +1,7 @@
 package presentation.navigation
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -21,7 +22,7 @@ import presentation.screens.viewModels.ArticleVM
 fun ANTNavHost(
     controller: NavHostController,
     snackbarHostState: SnackbarHostState,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.fillMaxSize(),
     articleVM: ArticleVM = koinInject(qualifier<ArticleVM>()),
     navItems: SnapshotStateList<String> = ANTStrings.screens
 ) {
@@ -36,10 +37,9 @@ fun ANTNavHost(
         composable(navItems[6]) { Advices(state, articleVM::getArticles) }
         composable(navItems[7]) { History(state, articleVM::getArticles) }
         composable(navItems[8]) { Sacraments(state) }
-        composable(navItems[9]) { Contacts(state) }
-        composable(navItems[10]) { Box(modifier) { LinearProgressIndicator(Modifier.align(Alignment.Center)) } }
-        composable(navItems[11]) { Volunteerism(state) }
-        composable(navItems[12]) { Stories(state, articleVM::getArticles) }
+        composable(navItems[9]) { Box(modifier) { LinearProgressIndicator(Modifier.align(Alignment.Center)) } }
+        composable(navItems[10]) { Volunteerism(state) }
+        composable(navItems[11]) { Stories(state, articleVM::getArticles) }
     }
     LaunchedEffect(state.status) {
         articleVM.articlesSF.collectLatest {
