@@ -3,7 +3,7 @@ package presentation.core
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,24 +13,27 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.toUri
 
 @Composable
-fun FredText(text: String, modifier: Modifier = Modifier, textAlign: TextAlign = TextAlign.Justify) {
+fun FredText(text: String, modifier: Modifier = Modifier, textAlign: TextAlign = TextAlign.Justify, textUnit: TextUnit = TextUnit.Unspecified) {
     Text(
         text,
         modifier,
+        fontSize = textUnit,
         fontFamily = FontFamily.Serif,
         textAlign = textAlign
     )
 }
 @Composable
-fun FredTitle(text: String) {
+fun FredTitle(text: String, textUnit: TextUnit = TextUnit.Unspecified) {
     Text(
         text,
         Modifier.fillMaxWidth(),
+        fontSize = textUnit,
         fontWeight = FontWeight.SemiBold,
         fontFamily = FontFamily.Serif,
         textAlign = TextAlign.Center
@@ -50,11 +53,11 @@ fun FredIconButton(onClick: Action, icon: ImageVector, description: String, modi
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FredTopAppBar(openDrawer: Action) {
+fun FredTopAppBar(isButtonVisible: Boolean, action: Action) {
     TopAppBar(
         title = { FredText(ANTStrings.MAIN_TITLE) },
-        Modifier.fillMaxWidth(),
-        navigationIcon = { FredIconButton(openDrawer, Icons.Outlined.Menu, ANTStrings.MENU) }
+        modifier = Modifier.fillMaxWidth().border(DividerDefaults.Thickness, MaterialTheme.colorScheme.primary),
+        actions = { if(isButtonVisible) FredIconButton(action, Icons.Outlined.DateRange, ANTStrings.SCHEDULE) }
     )
 }
 @Composable
@@ -63,33 +66,23 @@ fun FredNavigationDrawerItem(text: String, selected: Boolean, onClick: Action) {
         label = { FredText(text) },
         selected,
         onClick,
-        Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         shape = MaterialTheme.shapes.small,
         colors = NavigationDrawerItemDefaults.colors()
     )
 }
 @Composable
-fun FredFloatingActionButton(onClick: Action, icon: ImageVector) {
-    FloatingActionButton(
-        onClick = onClick,
-        modifier = Modifier.border(1.dp, MaterialTheme.colorScheme.primary, MaterialTheme.shapes.medium),
-        shape = MaterialTheme.shapes.medium
-    ) {
-        Icon(icon, ANTStrings.SCHEDULE)
-    }
-}
-@Composable
 fun FredCard(onClick: Action, uri: String?, title: String, date: String, modifier: Modifier = Modifier) {
     Card(
         onClick,
-        modifier.border(2.dp, MaterialTheme.colorScheme.primary, MaterialTheme.shapes.medium).padding(8.dp),
+        modifier.border(DividerDefaults.Thickness, MaterialTheme.colorScheme.primary, MaterialTheme.shapes.medium).padding(4.dp),
         shape = MaterialTheme.shapes.small,
         colors = CardDefaults.outlinedCardColors()
     ) {
-        if(!uri.isNullOrBlank()) AsyncImage(model = uri.toUri(), contentDescription = title, modifier = Modifier.fillMaxWidth().fillMaxHeight(0.3f))
+        if(!uri.isNullOrBlank()) AsyncImage(model = uri.toUri(), contentDescription = title, modifier = Modifier.fillMaxHeight(0.2f).fillMaxWidth(0.8f).padding(16.dp))
         Spacer(Modifier.height(4.dp))
         Text(title, Modifier.align(Alignment.CenterHorizontally).padding(horizontal = 4.dp), fontFamily = FontFamily.Serif, textAlign = TextAlign.Center, overflow = TextOverflow.Ellipsis, maxLines = 1)
         Spacer(Modifier.height(4.dp))
-        FredText(date, modifier = Modifier.align(Alignment.End))
+        FredText(date, modifier = Modifier.fillMaxWidth().padding(8.dp).align(Alignment.End))
     }
 }
