@@ -9,7 +9,6 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
  */
 object ANTStrings {
     const val MAIN_TITLE = "Храм Александра Невского"
-    const val MENU = "Меню"
     // error messages
     const val CONNECTION_ERROR = "Ошибка соединения с сервером"
     const val NO_INTERNET = "Нет интернета"
