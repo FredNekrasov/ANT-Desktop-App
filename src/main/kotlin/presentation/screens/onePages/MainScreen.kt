@@ -3,27 +3,38 @@ package presentation.screens.onePages
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.util.fastForEach
 import presentation.core.*
 import presentation.core.components.ImageSlider
 import presentation.screens.viewModels.ArticleState
 
 @Composable
 fun MainScreen(state: ArticleState) {
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(8.dp)) {
-        state.list.forEach {
-            if(it.articleType != ANTStrings.MAIN) return@forEach
-            FredTitle(it.articleType)
+    Column(Modifier.fillMaxSize().padding(8.dp)) {
+        state.list.fastForEach {
+            if(it.articleType != ANTStrings.MAIN) return@fastForEach
+            FredTitle(it.articleType, textUnit = 20.sp)
             Spacer(Modifier.height(4.dp))
-            if(it.date.isNotBlank()) FredText(it.date, modifier = Modifier.fillMaxWidth())
-            Spacer(Modifier.height(8.dp))
-            FredTitle(it.title)
+            FredText(it.date, modifier = Modifier.fillMaxWidth(), textUnit = 20.sp)
             Spacer(Modifier.height(4.dp))
-            ImageSlider(article = it, Modifier.fillMaxWidth())
-            Spacer(Modifier.height(8.dp))
-            FredText(it.description)
+            HorizontalDivider()
+            Row(Modifier.fillMaxSize().padding(top = 4.dp)) {
+                ImageSlider(article = it, Modifier.fillMaxHeight().wrapContentWidth())
+                Spacer(Modifier.width(4.dp))
+                VerticalDivider()
+                Spacer(Modifier.width(8.dp))
+                Column(Modifier.fillMaxHeight().verticalScroll(rememberScrollState())) {
+                    FredTitle(it.title, 20.sp)
+                    Spacer(Modifier.height(4.dp))
+                    FredText(it.description, textUnit = 20.sp)
+                }
+            }
         }
     }
 }

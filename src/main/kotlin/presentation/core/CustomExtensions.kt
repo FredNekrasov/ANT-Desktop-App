@@ -13,5 +13,5 @@ fun ConnectionStatus.getMessage(): String = when(this) {
 }
 fun ConnectionStatus.isError(): Boolean = (this != SUCCESS) && (this != LOADING)
 fun ConnectionStatus.isLoading(): Boolean = this == LOADING
-fun List<String>.getNotNull(index: Int): String = this.getOrNull(index).toString()
+fun List<String>.getNotNull(index: Int): String = this.getOrNull(index) ?: ""
 typealias Action = () -> Unit

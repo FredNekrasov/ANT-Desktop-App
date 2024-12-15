@@ -9,7 +9,6 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
  */
 object ANTStrings {
     const val MAIN_TITLE = "Храм Александра Невского"
-    const val MENU = "Меню"
     // error messages
     const val CONNECTION_ERROR = "Ошибка соединения с сервером"
     const val NO_INTERNET = "Нет интернета"
@@ -25,8 +24,7 @@ object ANTStrings {
     const val PRIESTHOOD = "Священство"
     const val ADVICES = "Советы священника"
     const val HISTORY = "История"
-    const val SACRAMENTS = "Требы"
-    const val CONTACTS = "Контакты"
+    private const val SACRAMENTS_AND_CONTACTS = "Требы и контакты"
     const val INFORMATION = "Информация"
     const val VOLUNTEERISM = "Приходская добровольческая служба"
     const val STORIES = "Рассказы"
@@ -38,6 +36,8 @@ object ANTStrings {
     const val EMAIL = "Электронная почта"
     const val TELEGRAM = "Телеграм"
     const val VK = "VK"
+    const val SACRAMENTS = "Требы"
+    const val CONTACTS = "Контакты"
 
-    val screens: SnapshotStateList<String> = mutableStateListOf(MAIN, PARISH_LIFE, SCHEDULE, SPIRITUAL_TALKS, YOUTH_CLUB, PRIESTHOOD, ADVICES, HISTORY, SACRAMENTS, CONTACTS, INFORMATION, VOLUNTEERISM, STORIES)
+    val screens: SnapshotStateList<String> = mutableStateListOf(MAIN, PARISH_LIFE, SCHEDULE, SPIRITUAL_TALKS, YOUTH_CLUB, PRIESTHOOD, ADVICES, HISTORY, SACRAMENTS_AND_CONTACTS, INFORMATION, VOLUNTEERISM, STORIES)
 }

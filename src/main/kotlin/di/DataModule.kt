@@ -19,11 +19,10 @@ import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
 val dataModule get() = module {
-    factory<SqlDriver>(qualifier = qualifier<SqlDriver>()) {
-        JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
-    }
-    single<ANTDatabase>(qualifier = qualifier<ANTDatabase>()) {
-        ANTDatabase.invoke(get(qualifier = qualifier<SqlDriver>()))
+    single<ANTDatabase>(createdAtStart = true, qualifier = qualifier<ANTDatabase>()) {
+        val driver: SqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+        ANTDatabase.Schema.create(driver)
+        ANTDatabase.invoke(driver)
     }
     single(qualifier = qualifier<ArticleDao>()) {
         ArticleDao(get(qualifier = qualifier<ANTDatabase>()))
