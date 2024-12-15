@@ -43,8 +43,10 @@ dependencies {
     // Compose
     implementation(compose.desktop.currentOs)
     implementation(compose.material3)
-    implementation("io.coil-kt.coil3:coil-compose:3.0.3")
-    implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
+    val coil = "3.0.4"
+    implementation("io.coil-kt.coil3:coil-compose:$coil")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:$coil")
+    implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha11")
 }
 
 compose.desktop {
