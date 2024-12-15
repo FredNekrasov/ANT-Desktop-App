@@ -35,7 +35,7 @@ internal fun ImageSlider(
                 Modifier.fillMaxHeight().fillMaxWidth().clickable {
                     url = photo
                     isDialogVisible = true
-                }.border(2.dp, MaterialTheme.colorScheme.background)
+                }
             )
         }
     }
