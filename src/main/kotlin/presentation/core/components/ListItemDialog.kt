@@ -35,7 +35,7 @@ internal inline fun ListItemDialog(
         FredText(article.description, modifier = Modifier.fillMaxHeight(0.8f).verticalScroll(rememberScrollState()), textUnit = 20.sp)
         Box(Modifier.fillMaxWidth().wrapContentHeight()) {
             FredIconButton(
-                onClick = { isShowDialog(false) }, icon = Icons.Default.Close, description = article.title,
+                onClick = { isShowDialog(false) }, icon = Icons.Default.Close,
                 modifier = Modifier.align(Alignment.BottomCenter).border(2.dp, MaterialTheme.colorScheme.error, MaterialTheme.shapes.medium)
             )
         }
