@@ -40,8 +40,8 @@ class ArticleRepository(
      * @return a flow of ActionStatus
      */
     override fun getList(catalogId: Int, pageNumber: Int) : Flow<ActionStatus<Article>> = flow {
-        val articleList = articleDao.getArticlesByCatalog(catalogId).map { it.toModel() }
-        if(!hasNewArticles(catalogId)) {
+        val articleList = articleDao.getArticlesBy(catalogId, pageNumber).map { it.toModel() }
+        if(!hasNewArticles(catalogId, pageNumber)) {
             emit(Success(articleList))
             return@flow
         }
@@ -56,7 +56,7 @@ class ArticleRepository(
             }
         }
     }.catch { ex ->
-        val articleList = articleDao.getArticlesByCatalog(catalogId).map { it.toModel() }
+        val articleList = articleDao.getArticlesBy(catalogId, pageNumber).map { it.toModel() }
         when(ex) {
             is HttpRequestTimeoutException -> emit(Error(articleList, CONNECTION_ERROR))
             is ClientRequestException -> emit(Error(articleList, NO_INTERNET))
@@ -73,17 +73,17 @@ class ArticleRepository(
     private suspend inline fun refreshData(response: ArticleResponse, catalogId: Int) {
         response.data.forEach {
             articleDao.deleteArticle(it.id)
-            articleDao.upsertArticle(it.toEntity())
+            articleDao.upsertArticle(it.toEntity(catalogId, response.pageNumber))
         }
-        val articleStatus = articleStatusDao.getArticleStatusByCatalogId(catalogId.toLong()) ?: ArticleStatusEntity(articleStatusDao.getCountAllArticleStatus(), catalogId.toLong(), LocalDate.now().toString())
+        val articleStatus = articleStatusDao.getArticleStatusBy(catalogId, response.pageNumber) ?: ArticleStatusEntity(articleStatusDao.getCountAllArticleStatus(), catalogId.toLong(), response.pageNumber.toLong(), LocalDate.now().toString())
         articleStatusDao.upsertArticleStatus(articleStatus.copy(currentDate = LocalDate.now().toString()))
     }
     /**
      * hasNewArticles function is used to check if there are new articles in the server
      * @return Boolean
      */
-    private suspend fun hasNewArticles(catalogId: Int): Boolean {
-        val lastArticleStatus = articleStatusDao.getArticleStatusByCatalogId(catalogId.toLong()) ?: return true
+    private suspend fun hasNewArticles(catalogId: Int, pageNumber: Int): Boolean {
+        val lastArticleStatus = articleStatusDao.getArticleStatusBy(catalogId, pageNumber) ?: return true
         return !lastArticleStatus.currentDate.contentEquals(LocalDate.now().toString())
     }
 }
