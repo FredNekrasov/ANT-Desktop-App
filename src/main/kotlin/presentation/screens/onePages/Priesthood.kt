@@ -12,10 +12,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEach
 import presentation.core.*
 import presentation.core.components.ImageSlider
-import presentation.screens.viewModels.ArticleState
+import presentation.screens.viewModels.MainArticleState
 
 @Composable
-fun Priesthood(state: ArticleState) {
+fun Priesthood(state: MainArticleState) {
     Column(Modifier.fillMaxSize().padding(8.dp)) {
         state.list.fastForEach {
             if(it.articleType != ANTStrings.PRIESTHOOD) return@fastForEach

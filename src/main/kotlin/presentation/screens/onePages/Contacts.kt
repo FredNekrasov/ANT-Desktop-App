@@ -14,10 +14,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEach
 import presentation.core.*
-import presentation.screens.viewModels.ArticleState
+import presentation.screens.viewModels.MainArticleState
 
 @Composable
-fun Sacraments(state: ArticleState) {
+fun Sacraments(state: MainArticleState) {
     val uriHandler = LocalUriHandler.current
     Column(Modifier.fillMaxWidth().padding(8.dp), Arrangement.Center) {
         state.list.fastForEach {
@@ -45,9 +45,9 @@ fun Sacraments(state: ArticleState) {
 @Composable
 private inline fun ContactsCard(contentList: List<String>, crossinline openSomeApp: (String) -> Unit) {
     Row(Modifier.fillMaxWidth().wrapContentHeight(), Arrangement.SpaceEvenly, Alignment.CenterVertically) {
-        FredIconButton({ openSomeApp(contentList.getNotNull(2)) }, Icons.Default.Phone, ANTStrings.PHONE)
+        FredIconButton({ openSomeApp(contentList.getNotNull(2)) }, Icons.Default.Phone)
         FredTButton({ openSomeApp(contentList.getNotNull(0)) }, ANTStrings.TELEGRAM)
         FredTButton({ openSomeApp(contentList.getNotNull(1)) }, ANTStrings.VK)
-        FredIconButton({ openSomeApp(contentList.getNotNull(3)) }, Icons.Default.MailOutline, ANTStrings.EMAIL)
+        FredIconButton({ openSomeApp(contentList.getNotNull(3)) }, Icons.Default.MailOutline)
     }
 }

@@ -1,27 +1,26 @@
 package presentation.screens
 
 import androidx.compose.runtime.Composable
-import presentation.core.ANTStrings
 import presentation.core.components.ContentList
-import presentation.screens.viewModels.ArticleState
+import presentation.screens.viewModels.PagedArticleState
 
 @Composable
-fun ParishLife(state: ArticleState, getArticles: (Int, Int) -> Unit) {
-    ContentList(state, getArticles, ANTStrings.PARISH_LIFE)
+fun ParishLife(state: PagedArticleState, getArticles: (Int) -> Unit) {
+    ContentList(state, getArticles)
 }
 @Composable
-fun YouthClub(state: ArticleState, getArticles: (Int, Int) -> Unit) {
-    ContentList(state, getArticles, ANTStrings.YOUTH_CLUB)
+fun YouthClub(state: PagedArticleState, getArticles: (Int) -> Unit) {
+    ContentList(state, getArticles)
 }
 @Composable
-fun Advices(state: ArticleState, getArticles: (Int, Int) -> Unit) {
-    ContentList(state, getArticles, ANTStrings.ADVICES)
+fun Advices(state: PagedArticleState, getArticles: (Int) -> Unit) {
+    ContentList(state, getArticles)
 }
 @Composable
-fun History(state: ArticleState, getArticles: (Int, Int) -> Unit) {
-    ContentList(state, getArticles, ANTStrings.HISTORY)
+fun History(state: PagedArticleState, getArticles: (Int) -> Unit) {
+    ContentList(state, getArticles)
 }
 @Composable
-fun Stories(state: ArticleState, getArticles: (Int, Int) -> Unit) {
-    ContentList(state, getArticles, ANTStrings.STORIES)
+fun Stories(state: PagedArticleState, getArticles: (Int) -> Unit) {
+    ContentList(state, getArticles)
 }
