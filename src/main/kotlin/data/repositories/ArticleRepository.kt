@@ -30,8 +30,8 @@ class ArticleRepository(
     private val client: HttpClient
 ) : IArticleRepository {
     /**
-     * Get list of articles by catalog id from the database and return it as a flow if there is no internet connection.
-     * If there is internet connection, get list of articles by catalog id from the server and return it as a flow
+     * Get list of articles by catalog id and page number from the database and return it as a flow if there is no internet connection.
+     * If there is internet connection, get list of articles by catalog id and page number from the server and return it as a flow
      *
      * @param catalogId The ID of the catalog to retrieve the list of articles from.
      * @param pageNumber The number of the page to retrieve the list of articles from.
