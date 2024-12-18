@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.window.Dialog
 import coil3.compose.AsyncImage
 import coil3.toUri
@@ -38,8 +38,13 @@ internal fun ImageSlider(
         }
     }
     if(isDialogVisible) Dialog(onDismissRequest = { isDialogVisible = false }) {
-        Column(Modifier.fillMaxSize().padding(8.dp)) {
-            AsyncImage(model = url.toUri(), contentDescription = article.title, Modifier.fillMaxSize())
+        Column(Modifier.fillMaxSize()) {
+            AsyncImage(
+                model = url.toUri(),
+                contentDescription = article.title,
+                Modifier.fillMaxSize().clickable { isDialogVisible = false },
+                contentScale = ContentScale.FillWidth
+            )
         }
     }
 }
