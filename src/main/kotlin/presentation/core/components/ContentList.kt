@@ -26,7 +26,7 @@ internal fun ContentList(
     var isShowDialog by remember { mutableStateOf(false) }
     var articleIndex by remember { mutableIntStateOf(0) }
     var page by remember { mutableIntStateOf(1) }
-    LazyVerticalStaggeredGrid(StaggeredGridCells.Fixed(2), Modifier.fillMaxSize().padding(8.dp)) {
+    LazyVerticalStaggeredGrid(StaggeredGridCells.Fixed(2), Modifier.fillMaxSize()) {
         itemsIndexed(state.map[page] ?: emptyList(), key = { _, it -> it.id }) { index, it ->
             FredCard(
                 onClick = { articleIndex = index; isShowDialog = true },
