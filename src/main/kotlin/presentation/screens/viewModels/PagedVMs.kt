@@ -12,8 +12,7 @@ open class ArticleVM(
     open fun getArticles(catalogId: Int, pageNumber: Int = 1) {
         CoroutineScope(Dispatchers.Default).launch {
             repository.getList(catalogId, pageNumber).flowOn(Dispatchers.IO).collectLatest {
-                val newState = if(it.list.size < 50)  articlesSF.value.copy(map = mapOf(pageNumber to it.list), status = it.status)
-                else articlesSF.value.copy(map = mapOf(pageNumber to it.list), status = it.status, hasNextData = true)
+                val newState = articlesSF.value.copy(map = mapOf(pageNumber to it.list), status = it.status, hasNextData = it.list.size >= 50)
                 articlesMSF.emit(newState)
             }
         }
