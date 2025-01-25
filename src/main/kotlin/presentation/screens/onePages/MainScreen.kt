@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEach
+import domain.models.Article
 import presentation.core.*
 import presentation.core.components.ImageSlider
 import presentation.screens.viewModels.MainArticleState
@@ -24,17 +25,24 @@ fun MainScreen(state: MainArticleState) {
             FredText(it.date, modifier = Modifier.fillMaxWidth(), textUnit = 20.sp)
             Spacer(Modifier.height(4.dp))
             HorizontalDivider()
-            Row(Modifier.fillMaxSize().padding(top = 4.dp)) {
-                ImageSlider(article = it, Modifier.fillMaxHeight().wrapContentWidth())
-                Spacer(Modifier.width(4.dp))
-                VerticalDivider()
-                Spacer(Modifier.width(8.dp))
-                Column(Modifier.fillMaxHeight().verticalScroll(rememberScrollState())) {
-                    FredTitle(it.title, 20.sp)
-                    Spacer(Modifier.height(4.dp))
-                    FredText(it.description, textUnit = 20.sp)
-                }
-            }
+            MainContent(it)
+        }
+    }
+}
+/**
+ * Display the content of the main page and the priesthood page
+ */
+@Composable
+fun MainContent(article: Article) {
+    Row(Modifier.fillMaxSize().padding(top = 4.dp)) {
+        ImageSlider(article, Modifier.fillMaxHeight().wrapContentWidth())
+        Spacer(Modifier.width(4.dp))
+        VerticalDivider()
+        Spacer(Modifier.width(8.dp))
+        Column(Modifier.fillMaxHeight().verticalScroll(rememberScrollState())) {
+            FredTitle(article.title, 20.sp)
+            Spacer(Modifier.height(4.dp))
+            FredText(article.description, textUnit = 20.sp)
         }
     }
 }
