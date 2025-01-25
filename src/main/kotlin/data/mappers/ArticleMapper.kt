@@ -3,7 +3,6 @@ package data.mappers
 import data.local.ArticleEntity
 import data.remote.dto.ArticleDto
 import domain.models.Article
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 /**
