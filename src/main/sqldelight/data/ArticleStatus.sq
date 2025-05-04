@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS ArticleStatusEntity (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    catalogId INTEGER NOT NULL,
+    pageNumber INTEGER NOT NULL,
+    currentDate TEXT NOT NULL
+);
+upsert:
+INSERT OR REPLACE
+INTO ArticleStatusEntity(id, catalogId, pageNumber, currentDate)
+VALUES ?;
+
+getBy:
+SELECT * FROM ArticleStatusEntity WHERE catalogId = :catalogId AND pageNumber = :page;
+
+getCountAll:
+SELECT COUNT(*) FROM ArticleStatusEntity;
